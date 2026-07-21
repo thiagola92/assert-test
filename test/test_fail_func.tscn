@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://xtemiton10qd"]
+
+[ext_resource type="Script" uid="uid://daumlyk6ty62t" path="res://test/test_fail_func.gd" id="1_psb70"]
+
+[node name="TestFailFunc" type="Node" unique_id=1967679800]
+script = ExtResource("1_psb70")
