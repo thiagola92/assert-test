@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Assert Scene"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="uid://dqbdw8oypgr83"
+config/icon="uid://v5k7ynp556gf"
 
 [display]
 
