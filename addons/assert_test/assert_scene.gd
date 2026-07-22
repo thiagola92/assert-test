@@ -14,6 +14,15 @@ extends Node
 ## To avoid unnecessary performance overhead, make sure to test as much you can in one scene.
 
 
+## Emitted when the test finish.
+signal finished(ok: bool)
+
+const OK_MESSAGE = "[color=green]OK[/color]"
+
+const FAIL_MESSAGE = "[color=red]FAIL[/color]"
+
+const _UNDEFINED = "<UNDEFINED>"
+
 const _HALTED_MESSAGE = "--- [u]Scene halted after exceeding time limit[/u]"
 
 ## Message to be printed together with the test result.
@@ -25,8 +34,11 @@ const _HALTED_MESSAGE = "--- [u]Scene halted after exceeding time limit[/u]"
 ## How long to wait for a scene to end.
 @export var timeout: int = 60
 
-## Shortcut to disable this test.
-@export var enabled: bool = true
+## If [code]true[/code], the test will start when the node is "ready".
+@export var autostart: bool = true
+
+## If [code]true[/code], the test will print report as soon as possible.
+@export var autoprint: bool = true
 
 var _thread: Thread = Thread.new()
 
@@ -36,21 +48,32 @@ var _pid: int = -1
 
 var _timer: Timer = Timer.new()
 
-var errors: String = ""
+var _halted: bool = false
 
-var halted: bool = false
+var _errors: String = ""
 
 
 func _ready() -> void:
-	if not enabled:
-		return
-	
 	_timer.one_shot = true
 	
 	add_child(_timer)
 	_timer.timeout.connect(_on_timer_timeout)
+	
+	if autostart:
+		start()
+
+
+func start() -> void:
 	_thread.start(_run_scene)
 	_timer.start(timeout)
+
+
+func print_report() -> void:
+	print_rich(_get_report())
+
+
+func is_ok() -> bool:
+	return _errors.is_empty() and not _halted
 
 
 func _run_scene() -> void:
@@ -80,7 +103,8 @@ func _monitor_process(pipe: Dictionary) -> void:
 	_pid = pipe["pid"]
 	
 	while OS.is_process_running(_pid):
-		errors += stderr.get_as_text()
+		# Can show error in the debug if the process is halted during the operation.
+		_errors += stderr.get_as_text()
 	
 	_mutex.lock()
 	
@@ -97,28 +121,28 @@ func _on_timer_timeout() -> void:
 	
 	if _pid >= 0:
 		OS.kill(_pid)
-		halted = true
+		_halted = true
 	
 	_mutex.unlock()
 	
 	if _thread.is_started():
 		_thread.wait_to_finish()
 	
-	_print_report()
-
-
-func _print_report() -> void:
-	var result: String
-	var msg: String = "<UNNAMED>" if message.is_empty() else message
+	if autoprint:
+		print_report()
 	
-	if errors.is_empty() and not halted:
-		result = "[color=green]OK[/color]"
-		
-		print_rich("(%s) [b]%s[/b]" % [result, msg])
-	else:
-		result = "[color=red]FAIL[/color]"
-		var lines: Array = errors.split("\n")
-		var report: String = "\n\t".join(lines)
-		var kill_msg: String = _HALTED_MESSAGE if halted else ""
-		
-		print_rich("(%s) [b]%s[/b] %s\n\t%s" % [result, msg, kill_msg, report])
+	finished.emit(is_ok())
+
+
+func _get_report() -> String:
+	var result: String
+	var msg: String = _UNDEFINED if message.is_empty() else message
+	
+	if is_ok():
+		return "(%s) [b]%s[/b]" % [OK_MESSAGE, msg]
+	
+	var lines: Array = _errors.split("\n")
+	var report: String = "\n\t".join(lines)
+	var kill_msg: String = _HALTED_MESSAGE if _halted else ""
+	
+	return "(%s) [b]%s[/b] %s\n\t%s" % [FAIL_MESSAGE, msg, kill_msg, report]

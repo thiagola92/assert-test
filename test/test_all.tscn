@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b2jj0207qi28c" path="res://test/assert_test/test_fail_timeout.tscn" id="5_otd2d"]
 [ext_resource type="PackedScene" uid="uid://5eso4oehb86r" path="res://test/assert_test/test_ok.tscn" id="6_xojy4"]
 
-[node name="Main" type="Node" unique_id=1109823782]
+[node name="TestAll" type="Node" unique_id=1331272698]
 
 [node name="AssertScene" type="Node" parent="." unique_id=1170510923]
 script = ExtResource("1_a37gk")
