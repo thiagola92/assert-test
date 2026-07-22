@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0yvmgvssl20u"]
 
-[ext_resource type="Script" uid="uid://blm3ek3o1qfmk" path="res://test/test_fail_lambda.gd" id="1_5pn3e"]
+[ext_resource type="Script" uid="uid://blm3ek3o1qfmk" path="res://test/assert_test/test_fail_lambda.gd" id="1_5pn3e"]
 
 [node name="TestFailLambda" type="Node" unique_id=1269591359]
 script = ExtResource("1_5pn3e")

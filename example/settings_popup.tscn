@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bx6spxaxkupmw"]
+
+[ext_resource type="Script" uid="uid://70ba0m5rf06u" path="res://example/settings_popup.gd" id="1_3hw0v"]
+
+[node name="SettingsPopup" type="Popup" unique_id=1712919135]
+oversampling_override = 1.0
+visible = true
+script = ExtResource("1_3hw0v")

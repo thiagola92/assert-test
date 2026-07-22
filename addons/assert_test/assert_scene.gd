@@ -7,22 +7,24 @@ extends Node
 ## was generate, we assume that no error happened.
 ## [br][br]
 ## Use the built-in [method @GDScript.assert] to test for errors inside the scenes and
-## remember to quit the scene with [code]get_tree().quit(0)[/code].
+## remember to quit the scene with [code]get_tree().quit.call_deferred(0)[/code].
 ## [br][br]
 ## [b]Warning[/b]: This class is slow because it uses process, threads, mutex. 
 ## To avoid unnecessary performance overhead, make sure to test as much you can in one scene.
 
 
-const _KILLED_MESSAGE = "\nScene killed after exceeding time limit, \
-to avoid this remember to end scene with [code]get_tree().quit(0)[/code]. \
-\nAs result of killing it, the scene stderr could be incomplete."
+const _HALTED_MESSAGE = "--- [u]Scene halted after exceeding time limit[/u]"
 
+## Message to be printed together with the test result.
 @export var message: String = ""
 
+## Scene to be tested.
 @export var scene: PackedScene
 
+## How long to wait for a scene to end.
 @export var timeout: int = 60
 
+## Shortcut to disable this test.
 @export var enabled: bool = true
 
 var _thread: Thread = Thread.new()
@@ -35,7 +37,7 @@ var _timer: Timer = Timer.new()
 
 var errors: String = ""
 
-var killed: bool = false
+var halted: bool = false
 
 
 func _ready() -> void:
@@ -94,28 +96,28 @@ func _on_timer_timeout() -> void:
 	
 	if _pid >= 0:
 		OS.kill(_pid)
-		killed = true
+		halted = true
 	
 	_mutex.unlock()
 	
 	if _thread.is_started():
 		_thread.wait_to_finish()
 	
-	print_report()
+	_print_report()
 
 
-func print_report() -> void:
+func _print_report() -> void:
 	var result: String
-	var title: String = "<UNNAMED>" if message.is_empty() else message
+	var msg: String = "<UNNAMED>" if message.is_empty() else message
 	
-	if errors.is_empty() and not killed:
+	if errors.is_empty() and not halted:
 		result = "[color=green]OK[/color]"
 		
-		print_rich("(%s) [b]%s[/b]" % [result, title])
+		print_rich("(%s) [b]%s[/b]" % [result, msg])
 	else:
 		result = "[color=red]FAIL[/color]"
 		var lines: Array = errors.split("\n")
 		var report: String = "\n\t".join(lines)
-		var kill_msg: String = _KILLED_MESSAGE if killed else ""
+		var kill_msg: String = _HALTED_MESSAGE if halted else ""
 		
-		print_rich("(%s) [b]%s[/b] [u]%s[/u]\n\t%s" % [result, title, kill_msg, report])
+		print_rich("(%s) [b]%s[/b] %s\n\t%s" % [result, msg, kill_msg, report])

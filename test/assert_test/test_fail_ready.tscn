@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dipps8i5kaaeu"]
 
-[ext_resource type="Script" uid="uid://cvjs8w2wpk2h0" path="res://test/test_fail_ready.gd" id="1_0m2dp"]
+[ext_resource type="Script" uid="uid://cvjs8w2wpk2h0" path="res://test/assert_test/test_fail_ready.gd" id="1_0m2dp"]
 
 [node name="TestFailReady" type="Node" unique_id=284537717]
 script = ExtResource("1_0m2dp")
