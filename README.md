@@ -23,15 +23,15 @@ func _ready() -> void:
 	# Preparing to quit after this function finish.
 	get_tree().quit.call_deferred(0)
 	
-	var initial_volume := $SettingsPopup.get_music_volume()
-	var desired_volume := 50
+	var initial_volume: int = $SettingsPopup.get_music_volume()
+	var desired_volume: int = 50
 
 	assert(initial_volume != desired_volume, "Volumes should be different for this test")
 
 	$SettingsPopup.set_music_volume(desired_volume)
-	var new_volume := $SettingsPopup.get_music_volume()
+	var new_volume: int = $SettingsPopup.get_music_volume()
 
-	assert(new_volume == desired_volume, "Volume did not changed")
+	assert(new_volume != desired_volume, "Volume did not changed")
 ```
 
 Now we create another scene, which we will use to test as many scenes we are interessing.  
@@ -43,6 +43,12 @@ Now we create another scene, which we will use to test as many scenes we are int
 ![Print screen of the inspector dock, showing AssertScene configured with property "scene" setted to previous scene](./example/img/print_screen_02.png)  
 
 That's it! Execute this scene to test the previous scene.  
+
+![Print screen of the output dock, showing that the test passed](./example/img/print_screen_04.png)  
+
+When failing it will show you the captured stderr:  
+
+![Print screen of the output dock, showing that the test failed](./example/img/print_screen_05.png)  
 
 As you create more test scene, you just have to add more `AssertScene` to this scene and execute it.  
 
