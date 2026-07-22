@@ -4,6 +4,7 @@ AssertTest was created so we could test scenes using [Godot](https://godotengine
 It's just ~120 lines of code that check if a scene produced any stderr (because asserts generate stderr when failing).  
 
 ## Installing
+Copy the `addons` directory to your project directory.  
 
 ## Usage
 Create a scene that does whatever you want to test.  
