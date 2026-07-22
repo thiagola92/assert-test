@@ -1,3 +1,4 @@
+@icon("res://addons/assert_test/assert_scene.svg")
 class_name AssertScene
 extends Node
 ## Used to assert that a scene is working correctly.

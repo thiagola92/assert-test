@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://cj2bhagevuiiq"]
-
-[ext_resource type="Script" uid="uid://bocbpcigy1w8n" path="res://addons/assert_test/assert_scene.gd" id="1_st4og"]
-
-[node name="AssertScene" type="Node" unique_id=604547050]
-script = ExtResource("1_st4og")
-timeout = 3

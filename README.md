@@ -1,6 +1,6 @@
 # AssertTest
 AssertTest was created so we could test scenes using [Godot](https://godotengine.org/) built-in [assert()](https://docs.godotengine.org/en/stable/classes/class_@gdscript.html#class-gdscript-method-assert).  
-It's just ~120 lines of code that check if a scene produced any stderr (asserts generate stderr when failing).  
+It's just ~120 lines of code that check if a scene produced any stderr (because asserts generate stderr when failing).  
 
 ## Installing
 
