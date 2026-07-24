@@ -21,12 +21,12 @@ const OK_MESSAGE = "[color=green]OK[/color]"
 
 const FAIL_MESSAGE = "[color=red]FAIL[/color]"
 
-const _UNDEFINED = "<UNDEFINED>"
+const _EMPTY = "<EMPTY>"
 
 const _HALTED_MESSAGE = "--- [u]Scene halted after exceeding time limit[/u]"
 
-## Message to be printed together with the test result.
-@export var message: String = ""
+## It will be printed together with the test result.
+@export var description: String = ""
 
 ## Scene to be tested.
 @export var scene: PackedScene
@@ -65,16 +65,17 @@ func is_ok() -> bool:
 
 func print_report() -> void:
 	var result: String
-	var msg: String = _UNDEFINED if message.is_empty() else message
+	var desc: String = _EMPTY if description.is_empty() else description
 	
 	if is_ok():
-		print_rich("(%s) [b]%s[/b]" % [OK_MESSAGE, msg])
+		print_rich("(%s) [b]%s[/b]" % [OK_MESSAGE, desc])
+		return
 	
 	var lines: Array = _errors.split("\n")
 	var report: String = "\n\t".join(lines)
-	var kill_msg: String = _HALTED_MESSAGE if _halted else ""
+	var halted_msg: String = _HALTED_MESSAGE if _halted else ""
 	
-	print_rich("(%s) [b]%s[/b] %s\n\t%s" % [FAIL_MESSAGE, msg, kill_msg, report])
+	print_rich("(%s) [b]%s[/b] %s\n\t%s" % [FAIL_MESSAGE, desc, halted_msg, report])
 
 
 func _run_scene() -> void:

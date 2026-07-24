@@ -8,36 +8,15 @@ signal scene_reporting(scene: AssertScene)
 
 signal suit_reporting
 
-enum ReportStyle {
-	## Hide suit and tests reports.
-	ALL_HIDE,
-	
-	## Hide tests reports.
-	OK_FAIL_HIDE,
-	
-	## Show tests reports, as soon as possible.
-	OK_FAIL_NOW,
-	
-	## Show tests reports, respecting scene order.
-	OK_FAIL_ORDER,
-	
-	## Show success reports first, then show fail reports.
-	OK_FIRST_FAIL_LATER,
-	
-	## Hide success reports, show fail reports.
-	OK_HIDE_FAIL_LATER,
-	
-	## Show as soon as possible fail reports.
-	OK_HIDE_FAIL_NOW,
-}
+## If [code]true[/code], hide all reports.
+@export var show_report: bool = true
 
-@export var report_style: ReportStyle = ReportStyle.OK_FAIL_NOW
+## If [code]true[/code], hide report that didn't failed.
+@export var hide_ok: bool = false
 
 var success_count: int = 0
 
 var fail_count: int = 0
-
-var finished_order: Array[AssertScene] = []
 
 var tests_count: int = 0
 
@@ -61,9 +40,16 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return []
 
 
+func print_report() -> void:
+	print_rich("%s %s, %s %s" % [
+		success_count,
+		AssertScene.OK_MESSAGE,
+		fail_count,
+		AssertScene.FAIL_MESSAGE
+	])
+
+
 func _on_assert_scene_finished(scene: AssertScene) -> void:
-	finished_order.append(scene)
-	
 	if scene.is_ok():
 		success_count += 1
 	else:
@@ -76,30 +62,12 @@ func _on_assert_scene_finished(scene: AssertScene) -> void:
 
 
 func _on_scene_reporting(scene: AssertScene) -> void:
-	if report_style == ReportStyle.OK_FAIL_NOW:
+	if show_report:
+		if scene.is_ok() and hide_ok:
+			return
 		scene.print_report()
-	elif report_style == ReportStyle.OK_HIDE_FAIL_NOW:
-		if not scene.is_ok():
-			scene.print_report()
 
 
 func _on_suit_reporting() -> void:
-	if report_style == ReportStyle.OK_FIRST_FAIL_LATER:
-		for scene in finished_order:
-			if scene.is_ok():
-				scene.print_report()
-		for scene in finished_order:
-			if not scene.is_ok():
-				scene.print_report()
-	elif report_style == ReportStyle.OK_HIDE_FAIL_LATER:
-		for scene in finished_order:
-			if not scene.is_ok():
-				scene.print_report()
-	
-	if report_style != ReportStyle.ALL_HIDE:
-		print_rich("%s %s, %s %s" % [
-			success_count,
-			AssertScene.OK_MESSAGE,
-			fail_count,
-			AssertScene.FAIL_MESSAGE
-		])
+	if show_report:
+		print_report()
