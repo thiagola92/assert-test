@@ -15,7 +15,7 @@ extends Node
 
 
 ## Emitted when the test finish.
-signal finished(ok: bool)
+signal finished
 
 const OK_MESSAGE = "[color=green]OK[/color]"
 
@@ -33,12 +33,6 @@ const _HALTED_MESSAGE = "--- [u]Scene halted after exceeding time limit[/u]"
 
 ## How long to wait for a scene to end.
 @export var timeout: int = 60
-
-## If [code]true[/code], the test will start when the node is "ready".
-@export var autostart: bool = true
-
-## If [code]true[/code], the test will print report as soon as possible.
-@export var autoprint: bool = true
 
 var _thread: Thread = Thread.new()
 
@@ -58,9 +52,6 @@ func _ready() -> void:
 	
 	add_child(_timer)
 	_timer.timeout.connect(_on_timer_timeout)
-	
-	if autostart:
-		start()
 
 
 func start() -> void:
@@ -68,12 +59,22 @@ func start() -> void:
 	_timer.start(timeout)
 
 
-func print_report() -> void:
-	print_rich(_get_report())
-
-
 func is_ok() -> bool:
 	return _errors.is_empty() and not _halted
+
+
+func print_report() -> void:
+	var result: String
+	var msg: String = _UNDEFINED if message.is_empty() else message
+	
+	if is_ok():
+		print_rich("(%s) [b]%s[/b]" % [OK_MESSAGE, msg])
+	
+	var lines: Array = _errors.split("\n")
+	var report: String = "\n\t".join(lines)
+	var kill_msg: String = _HALTED_MESSAGE if _halted else ""
+	
+	print_rich("(%s) [b]%s[/b] %s\n\t%s" % [FAIL_MESSAGE, msg, kill_msg, report])
 
 
 func _run_scene() -> void:
@@ -128,21 +129,4 @@ func _on_timer_timeout() -> void:
 	if _thread.is_started():
 		_thread.wait_to_finish()
 	
-	if autoprint:
-		print_report()
-	
-	finished.emit(is_ok())
-
-
-func _get_report() -> String:
-	var result: String
-	var msg: String = _UNDEFINED if message.is_empty() else message
-	
-	if is_ok():
-		return "(%s) [b]%s[/b]" % [OK_MESSAGE, msg]
-	
-	var lines: Array = _errors.split("\n")
-	var report: String = "\n\t".join(lines)
-	var kill_msg: String = _HALTED_MESSAGE if _halted else ""
-	
-	return "(%s) [b]%s[/b] %s\n\t%s" % [FAIL_MESSAGE, msg, kill_msg, report]
+	finished.emit()

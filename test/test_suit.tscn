@@ -12,46 +12,33 @@
 script = ExtResource("1_jrivb")
 metadata/_custom_type_script = "uid://fg2kh5g66dxw"
 
-[node name="AssertScene" type="Node" parent="." unique_id=1170510923]
+[node name="TestFailFunc" type="Node" parent="." unique_id=1170510923]
 script = ExtResource("1_l2lig")
 message = "Test failing assertion inside function"
 scene = ExtResource("2_yg8av")
-timeout = 3
-autostart = false
-autoprint = false
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
-[node name="AssertScene2" type="Node" parent="." unique_id=924675335]
+[node name="TestFailReady" type="Node" parent="." unique_id=924675335]
 script = ExtResource("1_l2lig")
 message = "Test failing assert inside _ready()"
 scene = ExtResource("3_we1kr")
-timeout = 3
-autostart = false
-autoprint = false
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
-[node name="AssertScene3" type="Node" parent="." unique_id=1773981486]
+[node name="TestFailLambda" type="Node" parent="." unique_id=1773981486]
 script = ExtResource("1_l2lig")
 message = "Test failing assert inside lambda function"
 scene = ExtResource("4_kw4vo")
-timeout = 3
-autostart = false
-autoprint = false
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
-[node name="AssertScene4" type="Node" parent="." unique_id=1320915783]
+[node name="TestFailTimeout" type="Node" parent="." unique_id=1320915783]
 script = ExtResource("1_l2lig")
 message = "Test failing because forgot to quit the scene"
 scene = ExtResource("5_wwd8d")
 timeout = 3
-autostart = false
-autoprint = false
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
-[node name="AssertScene5" type="Node" parent="." unique_id=1211629905]
+[node name="TestOk" type="Node" parent="." unique_id=1211629905]
 script = ExtResource("1_l2lig")
 message = "Test no error on scene resulting in OK"
 scene = ExtResource("6_20men")
-autostart = false
-autoprint = false
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
