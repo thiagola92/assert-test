@@ -1,17 +1,23 @@
-@icon("res://addons/assert_test/assert_suit.svg")
+@icon("res://addons/assert_test/nodes/assert_suit.svg")
 @tool
 class_name AssertSuit
 extends Node
+## Used to run multiple [AssertScene] and store the final result.
 
 
+## Emitted when a scene is reporting that it finished.
 signal scene_reporting(scene: AssertScene)
 
+## Emitted when the suit is reporting that it finished.
 signal suit_reporting
 
+## How many tests finished without error.
 var success_count: int = 0
 
+## How many tests finished with error (halting count as error).
 var fail_count: int = 0
 
+## How many tests existed.
 var tests_count: int = 0
 
 

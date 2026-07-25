@@ -1,4 +1,4 @@
-@icon("res://addons/assert_test/assert_scene.svg")
+@icon("res://addons/assert_test/nodes/assert_scene.svg")
 class_name AssertScene
 extends Node
 ## Used to assert that a scene is working correctly.
@@ -8,7 +8,7 @@ extends Node
 ## was generate, we assume that no error happened.
 ## [br][br]
 ## Use the built-in [method @GDScript.assert] to test for errors inside the scenes and
-## remember to quit the scene with [code]get_tree().quit.call_deferred(0)[/code].
+## don't forget to quit the scene with [code]get_tree().quit.call_deferred(0)[/code].
 ## [br][br]
 ## [b]Warning[/b]: This class is slow because it uses process, threads, mutex. 
 ## To avoid unnecessary performance overhead, make sure to test as much you can in one scene.

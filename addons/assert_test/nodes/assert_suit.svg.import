@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://77upo1arslpi"
-path="res://.godot/imported/assert_report.svg-1133d1762f04d98543c0e72b1b530fda.ctex"
+uid="uid://chrd02lbg24gi"
+path="res://.godot/imported/assert_suit.svg-789a9a8bd3c9082bf84607ce55ae3fe9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/assert_test/assert_report.svg"
-dest_files=["res://.godot/imported/assert_report.svg-1133d1762f04d98543c0e72b1b530fda.ctex"]
+source_file="res://addons/assert_test/nodes/assert_suit.svg"
+dest_files=["res://.godot/imported/assert_suit.svg-789a9a8bd3c9082bf84607ce55ae3fe9.ctex"]
 
 [params]
 

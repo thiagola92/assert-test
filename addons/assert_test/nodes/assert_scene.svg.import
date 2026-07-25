@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqbdw8oypgr83"
-path="res://.godot/imported/assert_scene.svg-9d5e0be38681781193adedb5ed424bef.ctex"
+path="res://.godot/imported/assert_scene.svg-774e939a8945f9d267879dbf1e4bde51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/assert_test/assert_scene.svg"
-dest_files=["res://.godot/imported/assert_scene.svg-9d5e0be38681781193adedb5ed424bef.ctex"]
+source_file="res://addons/assert_test/nodes/assert_scene.svg"
+dest_files=["res://.godot/imported/assert_scene.svg-774e939a8945f9d267879dbf1e4bde51.ctex"]
 
 [params]
 

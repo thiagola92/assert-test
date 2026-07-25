@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dnq8uaf52tg5l"]
 
-[ext_resource type="Script" uid="uid://bocbpcigy1w8n" path="res://addons/assert_test/assert_scene.gd" id="1_amow1"]
+[ext_resource type="Script" uid="uid://bocbpcigy1w8n" path="res://addons/assert_test/nodes/assert_scene.gd" id="1_amow1"]
 [ext_resource type="PackedScene" uid="uid://dt12wyrof3vas" path="res://example/test_saving.tscn" id="2_ehdv0"]
 
 [node name="Example" type="Node" unique_id=515688296]
