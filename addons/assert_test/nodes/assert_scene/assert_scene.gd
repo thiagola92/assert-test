@@ -1,4 +1,4 @@
-@icon("res://addons/assert_test/nodes/assert_scene.svg")
+@icon("./assert_scene.svg")
 class_name AssertScene
 extends Node
 ## Used to assert that a scene is working correctly.
@@ -63,19 +63,18 @@ func is_ok() -> bool:
 	return _errors.is_empty() and not _halted
 
 
-func print_report() -> void:
+func get_report() -> String:
 	var result: String
 	var desc: String = _EMPTY if description.is_empty() else description
 	
 	if is_ok():
-		print_rich("(%s) [b]%s[/b]" % [OK_MESSAGE, desc])
-		return
+		return "(%s) [b]%s[/b]" % [OK_MESSAGE, desc]
 	
 	var lines: Array = _errors.split("\n")
 	var report: String = "\n\t".join(lines)
 	var halted_msg: String = _HALTED_MESSAGE if _halted else ""
 	
-	print_rich("(%s) [b]%s[/b] %s\n\t%s" % [FAIL_MESSAGE, desc, halted_msg, report])
+	return "(%s) [b]%s[/b] %s\n\t%s" % [FAIL_MESSAGE, desc, halted_msg, report]
 
 
 func _run_scene() -> void:

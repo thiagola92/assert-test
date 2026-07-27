@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://beop5g0it4w84"]
 
-[ext_resource type="Script" uid="uid://bocbpcigy1w8n" path="res://addons/assert_test/nodes/assert_scene.gd" id="1_l2lig"]
-[ext_resource type="Script" uid="uid://crwbnpvnqkjxm" path="res://addons/assert_test/nodes/assert_report.gd" id="1_yg8av"]
-[ext_resource type="PackedScene" uid="uid://xtemiton10qd" path="res://test/scenes/test_fail_func.tscn" id="2_yg8av"]
-[ext_resource type="PackedScene" uid="uid://dipps8i5kaaeu" path="res://test/scenes/test_fail_ready.tscn" id="3_we1kr"]
-[ext_resource type="PackedScene" uid="uid://d0yvmgvssl20u" path="res://test/scenes/test_fail_lambda.tscn" id="4_kw4vo"]
-[ext_resource type="PackedScene" uid="uid://b2jj0207qi28c" path="res://test/scenes/test_fail_timeout.tscn" id="5_wwd8d"]
-[ext_resource type="PackedScene" uid="uid://5eso4oehb86r" path="res://test/scenes/test_ok.tscn" id="6_20men"]
+[ext_resource type="Script" uid="uid://bocbpcigy1w8n" path="res://addons/assert_test/nodes/assert_scene/assert_scene.gd" id="1_l2lig"]
+[ext_resource type="Script" uid="uid://crwbnpvnqkjxm" path="res://addons/assert_test/nodes/assert_report/assert_report.gd" id="1_yg8av"]
+[ext_resource type="PackedScene" uid="uid://xtemiton10qd" path="res://tests/scenes/test_fail_func.tscn" id="2_yg8av"]
+[ext_resource type="PackedScene" uid="uid://dipps8i5kaaeu" path="res://tests/scenes/test_fail_ready.tscn" id="3_we1kr"]
+[ext_resource type="PackedScene" uid="uid://d0yvmgvssl20u" path="res://tests/scenes/test_fail_lambda.tscn" id="4_kw4vo"]
+[ext_resource type="PackedScene" uid="uid://b2jj0207qi28c" path="res://tests/scenes/test_fail_timeout.tscn" id="5_wwd8d"]
+[ext_resource type="PackedScene" uid="uid://5eso4oehb86r" path="res://tests/scenes/test_ok.tscn" id="6_20men"]
 
 [node name="TestSuit" type="Node" unique_id=813201766]
 script = ExtResource("1_yg8av")

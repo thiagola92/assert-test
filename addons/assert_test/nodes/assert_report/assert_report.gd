@@ -1,8 +1,10 @@
-@icon("res://addons/assert_test/nodes/assert_report.svg")
+@icon("./assert_report.svg")
 @tool
 class_name AssertReport
 extends AssertSuit
-## Used to display the report from [AssertSuit] and all [AssertScene] children.
+## Used to display the report from [AssertSuit] and all it [AssertScene] children through terminal.
+##
+## It exit after reporting and the exit code it's zero if no error happened.
 
 
 ## Flags to be used in [member report_style] to configure how to report the result.
@@ -55,7 +57,7 @@ func _on_scene_reporting(scene: AssertScene) -> void:
 	if not scene.is_ok() and (report_style & Report.FAIL != Report.FAIL):
 		return
 	
-	scene.print_report()
+	print_rich(scene.get_report())
 
 
 func _on_suit_reporting() -> void:
@@ -65,7 +67,7 @@ func _on_suit_reporting() -> void:
 		_print_top_down()
 	
 	if report_style & Report.RESULT == Report.RESULT:
-		print_report()
+		print_rich(get_report())
 	
 	# Slowly quit to give time to print out the result.
 	get_tree().create_timer(1).timeout.connect(
@@ -77,19 +79,19 @@ func _print_ok_first() -> void:
 	for scene in get_children():
 		if scene is AssertScene:
 			if scene.is_ok() and (report_style & Report.OK == Report.OK):
-				scene.print_report()
+				print_rich(scene.get_report())
 	
 	for scene in get_children():
 		if scene is AssertScene:
 			if not scene.is_ok() and (report_style & Report.FAIL == Report.FAIL):
-				scene.print_report()
+				print_rich(scene.get_report())
 
 
 func _print_top_down() -> void:
 	for scene in get_children():
 		if scene is AssertScene:
 			if scene.is_ok() and (report_style & Report.OK == Report.OK):
-				scene.print_report()
+				print_rich(scene.get_report())
 			
 			if not scene.is_ok() and (report_style & Report.FAIL == Report.FAIL):
-				scene.print_report()
+				print_rich(scene.get_report())

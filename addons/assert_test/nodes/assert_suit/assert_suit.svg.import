@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chrd02lbg24gi"
-path="res://.godot/imported/assert_suit.svg-789a9a8bd3c9082bf84607ce55ae3fe9.ctex"
+path="res://.godot/imported/assert_suit.svg-aa6b3c4f2a795b77700b6ff0a1ab0017.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/assert_test/nodes/assert_suit.svg"
-dest_files=["res://.godot/imported/assert_suit.svg-789a9a8bd3c9082bf84607ce55ae3fe9.ctex"]
+source_file="res://addons/assert_test/nodes/assert_suit/assert_suit.svg"
+dest_files=["res://.godot/imported/assert_suit.svg-aa6b3c4f2a795b77700b6ff0a1ab0017.ctex"]
 
 [params]
 

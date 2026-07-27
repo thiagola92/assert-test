@@ -1,7 +1,9 @@
 # AssertTest
-AssertTest was created so we could test scenes using [Godot](https://godotengine.org/) built-in [`assert`](https://docs.godotengine.org/en/stable/classes/class_@gdscript.html#class-gdscript-method-assert).
+AssertTest was created to test scenes using [Godot](https://godotengine.org/) built-in [`assert`](https://docs.godotengine.org/en/stable/classes/class_@gdscript.html#class-gdscript-method-assert).
 
-It just check if a scene produced any stderr (because asserts generate stderr when failing).  
+It's not a replacement for full-featured unit testing addons like
+[GdUnit](https://godot-gdunit-labs.github.io/gdUnit4/latest/)
+or [Gut](https://gut.readthedocs.io/en/), it's my attempt to make creating tests pleasant for me.  
 
 ## Installing
 Copy the `addons` directory to your project directory.  

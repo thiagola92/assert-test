@@ -1,4 +1,4 @@
-@icon("res://addons/assert_test/nodes/assert_suit.svg")
+@icon("./assert_suit.svg")
 @tool
 class_name AssertSuit
 extends Node
@@ -37,13 +37,13 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return []
 
 
-func print_report() -> void:
-	print_rich("%s %s, %s %s" % [
+func get_report() -> String:
+	return "%s %s, %s %s" % [
 		success_count,
 		AssertScene.OK_MESSAGE,
 		fail_count,
 		AssertScene.FAIL_MESSAGE
-	])
+	]
 
 
 func _on_assert_scene_finished(scene: AssertScene) -> void:
