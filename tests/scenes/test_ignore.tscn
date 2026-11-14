@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://2hifrs3gtm28"]
+
+[ext_resource type="Script" uid="uid://71m714pi3rb5" path="res://tests/scenes/test_ignore.gd" id="1_u5eq3"]
+
+[node name="TestIgnore" type="Node" unique_id=1410816411]
+script = ExtResource("1_u5eq3")

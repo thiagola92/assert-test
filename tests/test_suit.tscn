@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d0yvmgvssl20u" path="res://tests/scenes/test_fail_lambda.tscn" id="4_kw4vo"]
 [ext_resource type="PackedScene" uid="uid://b2jj0207qi28c" path="res://tests/scenes/test_fail_timeout.tscn" id="5_wwd8d"]
 [ext_resource type="PackedScene" uid="uid://5eso4oehb86r" path="res://tests/scenes/test_ok.tscn" id="6_20men"]
+[ext_resource type="PackedScene" uid="uid://2hifrs3gtm28" path="res://tests/scenes/test_ignore.tscn" id="8_hm2py"]
 
 [node name="TestSuit" type="Node" unique_id=813201766]
 script = ExtResource("1_yg8av")
@@ -41,4 +42,11 @@ metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 script = ExtResource("1_l2lig")
 description = "Test no error on scene resulting in OK"
 scene = ExtResource("6_20men")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestIgnore" type="Node" parent="." unique_id=1592532071]
+script = ExtResource("1_l2lig")
+description = "Testing ignoring this test"
+scene = ExtResource("8_hm2py")
+ignore = true
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"

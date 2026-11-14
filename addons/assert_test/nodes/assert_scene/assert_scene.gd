@@ -32,7 +32,10 @@ const _HALTED_MESSAGE = "--- [u]Scene halted after exceeding time limit[/u]"
 @export var scene: PackedScene
 
 ## How long to wait for a scene to end.
-@export var timeout: int = 60
+@export var timeout: int = 30
+
+## Set to [code]true[/code] if this test should be ignored.
+@export var ignore: bool = false
 
 var _thread: Thread = Thread.new()
 
