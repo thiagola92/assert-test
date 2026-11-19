@@ -81,7 +81,7 @@ func get_report() -> String:
 
 
 func _run_scene() -> void:
-	assert(scene)
+	assert(scene, "No scene selected for this test")
 	
 	var root_path: String = ProjectSettings.globalize_path("res://")
 	var exe_path: String = OS.get_executable_path()
@@ -101,7 +101,7 @@ func _run_scene() -> void:
 
 
 func _monitor_process(pipe: Dictionary) -> void:
-	assert(not pipe.is_empty())
+	assert(not pipe.is_empty(), "Process cannot be created")
 	
 	var stderr: FileAccess = pipe["stderr"]
 	_pid = pipe["pid"]
