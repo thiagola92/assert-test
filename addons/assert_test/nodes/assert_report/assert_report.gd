@@ -1,4 +1,5 @@
 @icon("./assert_report.svg")
+@tool
 class_name AssertReport
 extends AssertSuit
 ## Used to display the report from [AssertSuit] and all it [AssertScene] children through terminal.
