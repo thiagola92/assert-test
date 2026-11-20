@@ -1,5 +1,4 @@
 @icon("./assert_suit.svg")
-@tool
 class_name AssertSuit
 extends Node
 ## Used to run multiple [AssertScene] and store the final result.
