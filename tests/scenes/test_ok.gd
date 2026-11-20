@@ -2,7 +2,7 @@ extends Node
 
 
 func _ready() -> void:
-	get_tree().create_timer(1).timeout.connect(func(): get_tree().quit(1))
+	get_tree().quit.call_deferred()
 	
 	@warning_ignore("assert_always_true")
 	assert(true, "everything should work just fine")

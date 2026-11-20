@@ -2,4 +2,5 @@ extends Node
 
 
 func _ready() -> void:
-	assert(false, "assert in a scene that never ends")
+	@warning_ignore("assert_always_true")
+	assert(true, "assert in a scene that never ends")

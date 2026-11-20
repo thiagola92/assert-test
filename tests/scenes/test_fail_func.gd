@@ -2,7 +2,7 @@ extends Node
 
 
 func _ready() -> void:
-	get_tree().quit.call_deferred(1)
+	get_tree().quit.call_deferred()
 	
 	function_call()
 

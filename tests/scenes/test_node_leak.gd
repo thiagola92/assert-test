@@ -1,0 +1,8 @@
+extends Node
+
+
+func _ready() -> void:
+	@warning_ignore("unused_variable")
+	var node := Node.new()
+	
+	get_tree().quit.call_deferred()
