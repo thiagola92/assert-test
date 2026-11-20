@@ -21,10 +21,6 @@ var fail_count: int = 0
 var tests_count: int = 0
 
 
-func _ready() -> void:
-	start()
-
-
 func _get_configuration_warnings() -> PackedStringArray:
 	for c in get_children():
 		if c is not AssertScene:
@@ -32,20 +28,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return []
 
 
-func get_report() -> String:
-	return "%s %s, %s %s" % [
-		success_count,
-		AssertScene.OK_MESSAGE,
-		fail_count,
-		AssertScene.FAIL_MESSAGE
-	]
-
-
 func start() -> void:
-	# Prevent activating inside the editor (e.g. EditorDock).
-	if Engine.is_editor_hint():
-		return
-	
 	for c in get_children():
 		if c is AssertScene:
 			if c.ignore:
@@ -55,6 +38,17 @@ func start() -> void:
 			c.start()
 			
 			tests_count += 1
+		elif c is AssertSuit:
+			pass
+
+
+func get_report() -> String:
+	return "%s %s, %s %s" % [
+		success_count,
+		AssertScene.OK_MESSAGE,
+		fail_count,
+		AssertScene.FAIL_MESSAGE
+	]
 
 
 func _on_assert_scene_finished(scene: AssertScene) -> void:

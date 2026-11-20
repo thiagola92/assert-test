@@ -50,7 +50,9 @@ func _ready() -> void:
 	scene_reporting.connect(_on_scene_reporting)
 	suit_reporting.connect(_on_suit_reporting)
 	
-	super()
+	# Prevent activating inside the editor (e.g. EditorDock).
+	if not Engine.is_editor_hint():
+		start()
 
 
 func _on_scene_reporting(scene: AssertScene) -> void:
