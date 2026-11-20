@@ -22,18 +22,21 @@ var tests_count: int = 0
 
 
 func _ready() -> void:
-	for c in get_children():
-		if c is AssertScene:
-			if Engine.is_editor_hint():
-				continue
+	for c: AssertScene in get_children():
+		if c is not AssertScene:
+			continue
+		
+		# Prevent activating inside the editor (e.g. EditorDock).
+		if Engine.is_editor_hint():
+			continue
+		
+		if c.ignore:
+			continue
 			
-			if c.ignore:
-				continue
-			
-			c.finished.connect(_on_assert_scene_finished.bind(c))
-			c.start()
-			
-			tests_count += 1
+		c.finished.connect(_on_assert_scene_finished.bind(c))
+		c.start()
+		
+		tests_count += 1
 
 
 func _get_configuration_warnings() -> PackedStringArray:
