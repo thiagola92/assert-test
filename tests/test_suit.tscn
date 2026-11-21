@@ -13,18 +13,19 @@
 
 [node name="TestSuit" type="Node" unique_id=813201766]
 script = ExtResource("1_yg8av")
+description = null
 metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
-
-[node name="TestFailFunc" type="Node" parent="." unique_id=1170510923]
-script = ExtResource("1_l2lig")
-description = "Test failing assertion inside function"
-scene = ExtResource("2_yg8av")
-metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
 [node name="TestFailReady" type="Node" parent="." unique_id=924675335]
 script = ExtResource("1_l2lig")
 description = "Test failing assert inside _ready()"
 scene = ExtResource("3_we1kr")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestFailFunc" type="Node" parent="." unique_id=1170510923]
+script = ExtResource("1_l2lig")
+description = "Test failing assertion inside function"
+scene = ExtResource("2_yg8av")
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
 [node name="TestFailLambda" type="Node" parent="." unique_id=1773981486]

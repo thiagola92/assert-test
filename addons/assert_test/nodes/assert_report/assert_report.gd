@@ -2,7 +2,8 @@
 @tool
 class_name AssertReport
 extends AssertSuit
-## Used to display the report from [AssertSuit] and all it [AssertScene] children through terminal.
+## Used to display the report from this [AssertSuit] and
+## all it [AssertScene]/[AssertSuit] children through terminal.
 ##
 ## It exit after reporting and the exit code it's zero if no error happened.
 
@@ -49,6 +50,7 @@ enum ReportOrder {
 func _ready() -> void:
 	scene_reporting.connect(_on_scene_reporting)
 	suit_reporting.connect(_on_suit_reporting)
+	finished.connect(_on_finished)
 	
 	# Prevent starting automatically when the parent is an AssertSuit.
 	if get_parent() is AssertSuit:
@@ -77,18 +79,34 @@ func _on_scene_reporting(scene: AssertScene) -> void:
 	print_rich(scene.get_report())
 
 
-func _on_suit_reporting() -> void:
+func _on_suit_reporting(suit: AssertSuit) -> void:
+	if report_order == ReportOrder.OK_FIRST:
+		return
+	
+	if report_order == ReportOrder.TOP_DOWN:
+		return
+	
+	if suit.is_ok() and (report_show & ReportShow.OK != ReportShow.OK):
+		return
+	
+	if not suit.is_ok() and (report_show & ReportShow.FAIL != ReportShow.FAIL):
+		return
+	
+	print_rich(suit.get_report())
+
+
+func _on_finished() -> void:
 	if report_order == ReportOrder.OK_FIRST:
 		_print_ok_first()
 	elif report_order == ReportOrder.TOP_DOWN:
 		_print_top_down()
 	
-	if report_show & ReportShow.RESULT == ReportShow.RESULT:
-		print_rich(get_report())
-	
-	# Prevent calling quit() because the parent will do it.
+	# Prevent reporting and quitting because it's the parent responsibility.
 	if get_parent() is AssertSuit:
 		return
+	
+	if report_show & ReportShow.RESULT == ReportShow.RESULT:
+		print_rich(get_report())
 	
 	# Slowly quit to give time to print out the result.
 	get_tree().create_timer(1).timeout.connect(
@@ -97,31 +115,52 @@ func _on_suit_reporting() -> void:
 
 
 func _print_ok_first() -> void:
-	for scene in get_children():
-		if scene is AssertScene:
-			if scene.ignore:
+	for c in get_children():
+		if c is AssertScene:
+			if c.ignore:
 				continue
 			
-			if scene.is_ok() and (report_show & ReportShow.OK == ReportShow.OK):
-				print_rich(scene.get_report())
+			if c.is_ok() and (report_show & ReportShow.OK == ReportShow.OK):
+				print_rich(c.get_report())
+		elif c is AssertSuit:
+			if c.ignore:
+				continue
+			
+			if c.is_ok() and (report_show & ReportShow.OK == ReportShow.OK):
+				print_rich(c.get_report())
 	
-	for scene in get_children():
-		if scene is AssertScene:
-			if scene.ignore:
+	for c in get_children():
+		if c is AssertScene:
+			if c.ignore:
 				continue
 			
-			if not scene.is_ok() and (report_show & ReportShow.FAIL == ReportShow.FAIL):
-				print_rich(scene.get_report())
+			if not c.is_ok() and (report_show & ReportShow.FAIL == ReportShow.FAIL):
+				print_rich(c.get_report())
+		elif c is AssertSuit:
+			if c.ignore:
+				continue
+			
+			if not c.is_ok() and (report_show & ReportShow.FAIL == ReportShow.FAIL):
+				print_rich(c.get_report())
 
 
 func _print_top_down() -> void:
-	for scene in get_children():
-		if scene is AssertScene:
-			if scene.ignore:
+	for c in get_children():
+		if c is AssertScene:
+			if c.ignore:
 				continue
 			
-			if scene.is_ok() and (report_show & ReportShow.OK == ReportShow.OK):
-				print_rich(scene.get_report())
+			if c.is_ok() and (report_show & ReportShow.OK == ReportShow.OK):
+				print_rich(c.get_report())
 			
-			if not scene.is_ok() and (report_show & ReportShow.FAIL == ReportShow.FAIL):
-				print_rich(scene.get_report())
+			if not c.is_ok() and (report_show & ReportShow.FAIL == ReportShow.FAIL):
+				print_rich(c.get_report())
+		elif c is AssertSuit:
+			if c.ignore:
+				continue
+			
+			if c.is_ok() and (report_show & ReportShow.OK == ReportShow.OK):
+				print_rich(c.get_report())
+			
+			if not c.is_ok() and (report_show & ReportShow.FAIL == ReportShow.FAIL):
+				print_rich(c.get_report())

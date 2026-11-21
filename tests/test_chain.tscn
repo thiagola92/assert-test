@@ -1,10 +1,103 @@
 [gd_scene format=3 uid="uid://bujtfdf0fd042"]
 
 [ext_resource type="Script" uid="uid://crwbnpvnqkjxm" path="res://addons/assert_test/nodes/assert_report/assert_report.gd" id="1_a1nl5"]
-[ext_resource type="PackedScene" uid="uid://beop5g0it4w84" path="res://tests/test_suit.tscn" id="2_vtioc"]
+[ext_resource type="Script" uid="uid://bocbpcigy1w8n" path="res://addons/assert_test/nodes/assert_scene/assert_scene.gd" id="2_vtioc"]
+[ext_resource type="PackedScene" uid="uid://dipps8i5kaaeu" path="res://tests/scenes/test_fail_ready.tscn" id="3_aricl"]
+[ext_resource type="PackedScene" uid="uid://xtemiton10qd" path="res://tests/scenes/test_fail_func.tscn" id="3_jnrnc"]
+[ext_resource type="PackedScene" uid="uid://d0yvmgvssl20u" path="res://tests/scenes/test_fail_lambda.tscn" id="4_t8uej"]
+[ext_resource type="PackedScene" uid="uid://5eso4oehb86r" path="res://tests/scenes/test_ok.tscn" id="5_aricl"]
+[ext_resource type="PackedScene" uid="uid://2hifrs3gtm28" path="res://tests/scenes/test_ignore.tscn" id="6_gt8ov"]
+[ext_resource type="PackedScene" uid="uid://k8r03c3s2ft2" path="res://tests/scenes/test_node_leak.tscn" id="7_x3rnq"]
+[ext_resource type="PackedScene" uid="uid://dcmfvl5xan13c" path="res://tests/scenes/test_reference_leak.tscn" id="8_d3o6t"]
+[ext_resource type="PackedScene" uid="uid://b2jj0207qi28c" path="res://tests/scenes/test_fail_timeout.tscn" id="9_t8uej"]
 
 [node name="TestChain" type="Node" unique_id=1696201549]
 script = ExtResource("1_a1nl5")
+description = "Testing putting suits inside suit"
 metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
 
-[node name="TestSuit" parent="." unique_id=813201766 instance=ExtResource("2_vtioc")]
+[node name="TestFast" type="Node" parent="." unique_id=1542233879]
+script = ExtResource("1_a1nl5")
+report_show = 1
+description = "Tests that are fast to fail"
+metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
+
+[node name="TestReady" type="Node" parent="TestFast" unique_id=289681057]
+script = ExtResource("2_vtioc")
+description = "Test failing assert inside _ready()"
+scene = ExtResource("3_aricl")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestFunction" type="Node" parent="." unique_id=67884402]
+script = ExtResource("1_a1nl5")
+report_show = 1
+description = "Tests relative to functions"
+metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
+
+[node name="TestFailFunc" type="Node" parent="TestFunction" unique_id=580871473]
+script = ExtResource("2_vtioc")
+description = "Test failing assertion inside function"
+scene = ExtResource("3_jnrnc")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestFailLambda" type="Node" parent="TestFunction" unique_id=222125943]
+script = ExtResource("2_vtioc")
+description = "Test failing assert inside lambda function"
+scene = ExtResource("4_t8uej")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestTime" type="Node" parent="." unique_id=1379271317]
+script = ExtResource("1_a1nl5")
+report_show = 1
+description = "Tests relative to time"
+metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
+
+[node name="TestFailTimeout" type="Node" parent="TestTime" unique_id=1145313809]
+script = ExtResource("2_vtioc")
+description = "Test failing because forgot to quit the scene"
+scene = ExtResource("9_t8uej")
+timeout = 3
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestOk" type="Node" parent="." unique_id=1521800558]
+script = ExtResource("1_a1nl5")
+report_show = 1
+description = "Tests that should be okay"
+metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
+
+[node name="TestOk" type="Node" parent="TestOk" unique_id=1130656107]
+script = ExtResource("2_vtioc")
+description = "Test no error on scene resulting in OK"
+scene = ExtResource("5_aricl")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestIgnore" type="Node" parent="." unique_id=470964470]
+script = ExtResource("1_a1nl5")
+report_show = 1
+ignore = true
+metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
+
+[node name="TestIgnore" type="Node" parent="TestIgnore" unique_id=1290189835]
+script = ExtResource("2_vtioc")
+description = "Testing ignoring this test"
+scene = ExtResource("6_gt8ov")
+ignore = true
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestMemoryLeak" type="Node" parent="." unique_id=1066292185]
+script = ExtResource("1_a1nl5")
+report_show = 1
+description = "Tests relative to memory leak"
+metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
+
+[node name="TestNodeLeak" type="Node" parent="TestMemoryLeak" unique_id=335434244]
+script = ExtResource("2_vtioc")
+description = "Test leaking node"
+scene = ExtResource("7_x3rnq")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestReferenceLeak" type="Node" parent="TestMemoryLeak" unique_id=1247295419]
+script = ExtResource("2_vtioc")
+description = "Test leaking refcounted"
+scene = ExtResource("8_d3o6t")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
