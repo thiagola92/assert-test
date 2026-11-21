@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dcmfvl5xan13c"]
+
+[ext_resource type="Script" uid="uid://bykakhy4oskn6" path="res://tests/scenes/test_refcounted_leak.gd" id="1_w0v56"]
+
+[node name="TestRefCountedLeak" type="Node" unique_id=1792930970]
+script = ExtResource("1_w0v56")

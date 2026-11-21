@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://caa2glwjxfd8j"]
+
+[ext_resource type="Script" uid="uid://tydrmri2dghk" path="res://tests/scenes/test_object_leak.gd" id="1_7m6ow"]
+
+[node name="TestObjectLeak" type="Node" unique_id=2042448255]
+script = ExtResource("1_7m6ow")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"

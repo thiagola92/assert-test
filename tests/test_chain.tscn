@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://5eso4oehb86r" path="res://tests/scenes/test_ok.tscn" id="5_aricl"]
 [ext_resource type="PackedScene" uid="uid://2hifrs3gtm28" path="res://tests/scenes/test_ignore.tscn" id="6_gt8ov"]
 [ext_resource type="PackedScene" uid="uid://k8r03c3s2ft2" path="res://tests/scenes/test_node_leak.tscn" id="7_x3rnq"]
-[ext_resource type="PackedScene" uid="uid://dcmfvl5xan13c" path="res://tests/scenes/test_reference_leak.tscn" id="8_d3o6t"]
+[ext_resource type="PackedScene" uid="uid://dcmfvl5xan13c" path="res://tests/scenes/test_refcounted_leak.tscn" id="8_d3o6t"]
 [ext_resource type="PackedScene" uid="uid://b2jj0207qi28c" path="res://tests/scenes/test_fail_timeout.tscn" id="9_t8uej"]
 
 [node name="TestChain" type="Node" unique_id=1696201549]
@@ -96,7 +96,7 @@ description = "Test leaking node"
 scene = ExtResource("7_x3rnq")
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
-[node name="TestReferenceLeak" type="Node" parent="TestMemoryLeak" unique_id=1247295419]
+[node name="TestRefCountedLeak" type="Node" parent="TestMemoryLeak" unique_id=1247295419]
 script = ExtResource("2_vtioc")
 description = "Test leaking refcounted"
 scene = ExtResource("8_d3o6t")

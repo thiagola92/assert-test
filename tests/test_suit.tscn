@@ -9,11 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://5eso4oehb86r" path="res://tests/scenes/test_ok.tscn" id="6_20men"]
 [ext_resource type="PackedScene" uid="uid://2hifrs3gtm28" path="res://tests/scenes/test_ignore.tscn" id="8_hm2py"]
 [ext_resource type="PackedScene" uid="uid://k8r03c3s2ft2" path="res://tests/scenes/test_node_leak.tscn" id="9_f2b0g"]
-[ext_resource type="PackedScene" uid="uid://dcmfvl5xan13c" path="res://tests/scenes/test_reference_leak.tscn" id="10_hwjwk"]
+[ext_resource type="PackedScene" uid="uid://dcmfvl5xan13c" path="res://tests/scenes/test_refcounted_leak.tscn" id="10_hwjwk"]
+[ext_resource type="PackedScene" uid="uid://caa2glwjxfd8j" path="res://tests/scenes/test_object_leak.tscn" id="11_oycs6"]
 
 [node name="TestSuit" type="Node" unique_id=813201766]
 script = ExtResource("1_yg8av")
-description = null
 metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
 
 [node name="TestFailReady" type="Node" parent="." unique_id=924675335]
@@ -60,8 +60,14 @@ description = "Test leaking node"
 scene = ExtResource("9_f2b0g")
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
-[node name="TestReferenceLeak" type="Node" parent="." unique_id=980969025]
+[node name="TestRefCountedLeak" type="Node" parent="." unique_id=980969025]
 script = ExtResource("1_l2lig")
 description = "Test leaking refcounted"
 scene = ExtResource("10_hwjwk")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestObjectLeak" type="Node" parent="." unique_id=733728393]
+script = ExtResource("1_l2lig")
+description = "Testing leaking object"
+scene = ExtResource("11_oycs6")
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
