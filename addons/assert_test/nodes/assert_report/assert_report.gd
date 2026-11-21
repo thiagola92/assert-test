@@ -50,9 +50,15 @@ func _ready() -> void:
 	scene_reporting.connect(_on_scene_reporting)
 	suit_reporting.connect(_on_suit_reporting)
 	
-	# Prevent activating inside the editor (e.g. EditorDock).
-	if not Engine.is_editor_hint():
-		start()
+	# Prevent starting automatically when the parent is an AssertSuit.
+	if get_parent() is AssertSuit:
+		return
+	
+	# Prevent starting automatically when running inside the editor (e.g. EditorDock).
+	if Engine.is_editor_hint():
+		return
+	
+	start()
 
 
 func _on_scene_reporting(scene: AssertScene) -> void:
@@ -79,6 +85,10 @@ func _on_suit_reporting() -> void:
 	
 	if report_show & ReportShow.RESULT == ReportShow.RESULT:
 		print_rich(get_report())
+	
+	# Prevent calling quit() because the parent will do it.
+	if get_parent() is AssertSuit:
+		return
 	
 	# Slowly quit to give time to print out the result.
 	get_tree().create_timer(1).timeout.connect(

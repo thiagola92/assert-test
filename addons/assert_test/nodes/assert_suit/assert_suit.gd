@@ -23,8 +23,8 @@ var tests_count: int = 0
 
 func _get_configuration_warnings() -> PackedStringArray:
 	for c in get_children():
-		if c is not AssertScene:
-			return ["All nodes children should be AssertScene"]
+		if c is not AssertScene and c is not AssertSuit:
+			return ["All nodes children should be AssertScene/AssertSuit"]
 	return []
 
 
@@ -39,7 +39,7 @@ func start() -> void:
 			
 			tests_count += 1
 		elif c is AssertSuit:
-			pass
+			c.start()
 
 
 func get_report() -> String:

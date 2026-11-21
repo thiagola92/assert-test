@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bujtfdf0fd042"]
+
+[ext_resource type="Script" uid="uid://crwbnpvnqkjxm" path="res://addons/assert_test/nodes/assert_report/assert_report.gd" id="1_a1nl5"]
+[ext_resource type="PackedScene" uid="uid://beop5g0it4w84" path="res://tests/test_suit.tscn" id="2_vtioc"]
+
+[node name="TestChain" type="Node" unique_id=1696201549]
+script = ExtResource("1_a1nl5")
+metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
+
+[node name="TestSuit" parent="." unique_id=813201766 instance=ExtResource("2_vtioc")]
