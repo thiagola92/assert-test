@@ -8,7 +8,7 @@ extends Node
 ## was generate, we assume that no error happened.
 ## [br][br]
 ## Use the built-in [method @GDScript.assert] to test for errors inside the scenes and
-## don't forget to quit the scene with [code]get_tree().quit.call_deferred(0)[/code].
+## don't forget to quit the scene with [code]get_tree().quit()[/code].
 ## [br][br]
 ## [b]Warning[/b]: This class is slow because it uses process, threads, mutex. 
 ## To avoid unnecessary performance overhead, make sure to test as much you can in one scene.
@@ -115,7 +115,8 @@ func _monitor_process(pipe: Dictionary) -> void:
 	_pid = -1
 	
 	if not _timer.is_stopped():
-		_timer.start.call_deferred(0.01)
+		_timer.stop.call_deferred()
+		_timer.timeout.emit.call_deferred()
 	
 	_mutex.unlock()
 

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bocbpcigy1w8n" path="res://addons/assert_test/nodes/assert_scene/assert_scene.gd" id="2_vtioc"]
 [ext_resource type="PackedScene" uid="uid://dipps8i5kaaeu" path="res://tests/scenes/test_fail_ready.tscn" id="3_aricl"]
 [ext_resource type="PackedScene" uid="uid://xtemiton10qd" path="res://tests/scenes/test_fail_func.tscn" id="3_jnrnc"]
+[ext_resource type="PackedScene" uid="uid://wy7wcji6ar4y" path="res://tests/scenes/test_fail_ready_timeout.tscn" id="4_gt8ov"]
 [ext_resource type="PackedScene" uid="uid://d0yvmgvssl20u" path="res://tests/scenes/test_fail_lambda.tscn" id="4_t8uej"]
 [ext_resource type="PackedScene" uid="uid://5eso4oehb86r" path="res://tests/scenes/test_ok.tscn" id="5_aricl"]
 [ext_resource type="PackedScene" uid="uid://2hifrs3gtm28" path="res://tests/scenes/test_ignore.tscn" id="6_gt8ov"]
@@ -16,16 +17,23 @@ script = ExtResource("1_a1nl5")
 description = "Testing putting suits inside suit"
 metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
 
-[node name="TestFast" type="Node" parent="." unique_id=1542233879]
+[node name="TestReady" type="Node" parent="." unique_id=1542233879]
 script = ExtResource("1_a1nl5")
 report_show = 1
-description = "Tests that are fast to fail"
+description = "Tests asserts inside _ready()"
 metadata/_custom_type_script = "uid://crwbnpvnqkjxm"
 
-[node name="TestReady" type="Node" parent="TestFast" unique_id=289681057]
+[node name="TestReady" type="Node" parent="TestReady" unique_id=289681057]
 script = ExtResource("2_vtioc")
 description = "Test failing assert inside _ready()"
 scene = ExtResource("3_aricl")
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestFailReadyTimeout" type="Node" parent="TestReady" unique_id=109314658]
+script = ExtResource("2_vtioc")
+description = "Test failing by timeout in _ready()"
+scene = ExtResource("4_gt8ov")
+timeout = 3
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
 [node name="TestFunction" type="Node" parent="." unique_id=67884402]

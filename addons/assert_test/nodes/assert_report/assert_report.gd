@@ -110,7 +110,7 @@ func _on_finished() -> void:
 	
 	# Slowly quit to give time to print out the result.
 	get_tree().create_timer(1).timeout.connect(
-		func(): get_tree().quit.call_deferred(fail_count)
+		func(): get_tree().quit(fail_count)
 	)
 
 

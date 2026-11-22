@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://wy7wcji6ar4y"]
+
+[ext_resource type="Script" uid="uid://c3wp74c5o4jo2" path="res://tests/scenes/test_fail_ready_timeout.gd" id="1_hmter"]
+
+[node name="TestFailReadyTimeout" type="Node" unique_id=1646949236]
+script = ExtResource("1_hmter")
