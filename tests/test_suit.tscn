@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b2jj0207qi28c" path="res://tests/scenes/test_fail_timeout.tscn" id="5_wwd8d"]
 [ext_resource type="PackedScene" uid="uid://5eso4oehb86r" path="res://tests/scenes/test_ok.tscn" id="6_20men"]
 [ext_resource type="PackedScene" uid="uid://2hifrs3gtm28" path="res://tests/scenes/test_ignore.tscn" id="8_hm2py"]
+[ext_resource type="PackedScene" uid="uid://dtq6rsdp3riqn" path="res://tests/scenes/test_fail_break_function.tscn" id="9_2874i"]
 [ext_resource type="PackedScene" uid="uid://k8r03c3s2ft2" path="res://tests/scenes/test_node_leak.tscn" id="9_f2b0g"]
 [ext_resource type="PackedScene" uid="uid://dcmfvl5xan13c" path="res://tests/scenes/test_refcounted_leak.tscn" id="10_hwjwk"]
 [ext_resource type="PackedScene" uid="uid://caa2glwjxfd8j" path="res://tests/scenes/test_object_leak.tscn" id="11_oycs6"]
@@ -47,6 +48,12 @@ script = ExtResource("1_l2lig")
 description = "Test failing because forgot to quit the scene"
 scene = ExtResource("5_wwd8d")
 timeout = 3
+metadata/_custom_type_script = "uid://bocbpcigy1w8n"
+
+[node name="TestFailBreakFunction" type="Node" parent="." unique_id=1151229095]
+script = ExtResource("1_l2lig")
+description = "Testing predicting a function breaking"
+scene = ExtResource("9_2874i")
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
 [node name="TestOk" type="Node" parent="." unique_id=1211629905]

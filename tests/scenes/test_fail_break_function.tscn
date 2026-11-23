@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dtq6rsdp3riqn"]
+
+[ext_resource type="Script" uid="uid://w2egqq5xjpxp" path="res://tests/scenes/test_fail_break_function.gd" id="1_tlm86"]
+
+[node name="TestFailBreakFunction" type="Node" unique_id=1607067184]
+script = ExtResource("1_tlm86")
