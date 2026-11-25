@@ -37,6 +37,9 @@ const _HALTED_MESSAGE = "--- [u]Scene halted after exceeding time limit[/u]"
 ## Set to [code]true[/code] if this test should be ignored.
 @export var ignore: bool = false
 
+## Filter to be used when receiving stderr.
+@export var filter: AssertFilter = null
+
 var _thread: Thread = Thread.new()
 
 var _mutex: Mutex = Mutex.new()
@@ -106,9 +109,12 @@ func _monitor_process(pipe: Dictionary) -> void:
 	var stderr: FileAccess = pipe["stderr"]
 	_pid = pipe["pid"]
 	
+	if filter == null:
+		filter = AssertFilter.new()
+	
 	while OS.is_process_running(_pid):
-		# Can show error in the debug if the process is halted during the operation.
-		_errors += stderr.get_as_text()
+		# Can show error in the debug if the process is halted while getting text.
+		_errors += filter.apply(stderr.get_as_text())
 	
 	_mutex.lock()
 	
