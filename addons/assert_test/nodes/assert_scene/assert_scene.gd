@@ -37,7 +37,7 @@ const _HALTED_MESSAGE = "--- [u]Scene halted after exceeding time limit[/u]"
 ## Set to [code]true[/code] if this test should be ignored.
 @export var ignore: bool = false
 
-## Filter to be used when receiving stderr.
+## Filter to be used when receiving stderr text.
 @export var filter: AssertFilter = null
 
 var _thread: Thread = Thread.new()
