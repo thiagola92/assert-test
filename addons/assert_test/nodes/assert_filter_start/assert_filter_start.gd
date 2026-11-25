@@ -9,9 +9,6 @@ extends AssertFilter
 
 
 func apply(text: String) -> String:
-	if text.is_empty():
-		return text
-	
 	var parts: PackedStringArray = text.split("\n")
 	
 	# Walk backward so we can remove at any moment.
