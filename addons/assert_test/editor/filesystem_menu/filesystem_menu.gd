@@ -77,6 +77,8 @@ func _create_nodes(dirpath: String, owner: AssertReport = null) -> AssertReport:
 		elif current.get_extension() == "tscn":
 			var assert_scene: AssertScene = AssertScene.new()
 			assert_scene.name = current.get_file().get_slice(".", 0).to_pascal_case()
+			assert_scene.description = assert_scene.name.to_snake_case()
+			assert_scene.scene = load(dirpath.path_join(current))
 			
 			parent.add_child(assert_scene)
 			assert_scene.set_owner.call_deferred(owner)
