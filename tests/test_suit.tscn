@@ -28,7 +28,6 @@ metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 script = ExtResource("1_l2lig")
 description = "Test failing by timeout in _ready()"
 scene = ExtResource("4_hdgip")
-timeout = 3
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
 [node name="TestFailFunc" type="Node" parent="." unique_id=1170510923]
@@ -47,7 +46,6 @@ metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 script = ExtResource("1_l2lig")
 description = "Test failing because forgot to quit the scene"
 scene = ExtResource("5_wwd8d")
-timeout = 3
 metadata/_custom_type_script = "uid://bocbpcigy1w8n"
 
 [node name="TestFailBreakFunction" type="Node" parent="." unique_id=1151229095]
