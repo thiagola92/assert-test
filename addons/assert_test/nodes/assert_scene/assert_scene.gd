@@ -131,8 +131,12 @@ func _on_timer_timeout() -> void:
 	_mutex.lock()
 	
 	if _pid >= 0:
-		OS.kill(_pid)
+		var result: int = OS.kill(_pid)
 		_halted = true
+		
+		# Don't assert() because we don't want to cause a break here.
+		if result != OK:
+			push_error("Couldn't kill the process %s" % _pid)
 	
 	_mutex.unlock()
 	
