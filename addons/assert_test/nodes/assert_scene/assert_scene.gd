@@ -3,15 +3,28 @@ class_name AssertScene
 extends Node
 ## Used to assert that a scene is working correctly.
 ##
-## It spawn a process and thread, the process execute the target [member scene] and
-## the thread monitor the process stderr. If at the end of the process no error message
-## was generate, we assume that no error happened.
+## Inside the [member scene], use the built-in [method @GDScript.assert] to test
+## for errors and call [code]get_tree().quit()[/code] to finish the test.  
+## [codeblock]
+## func _ready() -> void:
+##     function_to_be_tested()
+##     get_tree().quit()
+##
+## func function_to_be_tested() -> void:
+##     assert(false, "Test something using assert method")
+## [/codeblock]
+## This node only start working when calling [method start],
+## which will spawn a thread that spawn a process.
 ## [br][br]
-## Use the built-in [method @GDScript.assert] to test for errors inside the scenes and
-## don't forget to quit the scene with [code]get_tree().quit()[/code].
-## [br][br]
-## [b]Warning[/b]: This class is slow because it uses process, threads, mutex. 
-## To avoid unnecessary performance overhead, make sure to test as much you can in one scene.
+## - The thread will monitor the process lifecycle and collect it stderr.[br]
+## - The process will execute the user [member scene].[br]
+## [br]
+## If at the end of the process lifecycle no error message was generate,
+## we assume that no error happened.
+##
+## @tutorial(Quitting): https://thiagola92.github.io/assert-test-docs/cautions/quitting/
+## @tutorial(Memory Leak): https://thiagola92.github.io/assert-test-docs/cautions/memory_leak/
+## @tutorial(Performance): https://thiagola92.github.io/assert-test-docs/cautions/performance/
 
 
 ## Emitted when the test finish.
@@ -60,6 +73,12 @@ func _ready() -> void:
 	_timer.timeout.connect(_on_timer_timeout)
 
 
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_CRASH:
+			_kill_process()
+
+
 func start() -> void:
 	_thread.start(_run_scene)
 	_timer.start(timeout)
@@ -81,6 +100,17 @@ func get_report() -> String:
 	var halted_msg: String = _HALTED_MESSAGE if _halted else ""
 	
 	return "(%s) [b]%s[/b] %s\n\t%s" % [FAIL_MESSAGE, desc, halted_msg, report]
+
+
+func _kill_process() -> void:
+	_mutex.lock()
+	
+	if _pid >= 0:
+		# Don't assert() because we don't want to cause a crash inside a lock.
+		if OS.kill(_pid) != OK:
+			push_error("Couldn't kill the process %s" % _pid)
+	
+	_mutex.unlock()
 
 
 func _run_scene() -> void:
@@ -131,12 +161,12 @@ func _on_timer_timeout() -> void:
 	_mutex.lock()
 	
 	if _pid >= 0:
-		var result: int = OS.kill(_pid)
+		# Don't assert() because we don't want to cause a break inside lock.
+		if OS.kill(_pid) != OK:
+			push_error("Couldn't kill the process %s" % _pid)
+		
 		_halted = true
 		
-		# Don't assert() because we don't want to cause a break here.
-		if result != OK:
-			push_error("Couldn't kill the process %s" % _pid)
 	
 	_mutex.unlock()
 	
